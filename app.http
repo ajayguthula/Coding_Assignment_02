@@ -1,0 +1,64 @@
+
+POST http://localhost:3000/validate/
+Content-Type: application/json
+
+{
+  "username":"JoeBiden",
+  "password":"biden@123"
+}
+###
+POST http://localhost:3000/register/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjc1NTIxMzg5fQ.06Xjpk0NrR_YcXrhu1rkXFrHzfRQSOqngA8jjIec7ko
+
+{
+  "username": "adam_richard",
+  "password": "richaed_567",
+  "name": "Adam Richard",
+  "gender": "male"
+}
+###
+POST http://localhost:3000/login/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjc1NTIxMzg5fQ.06Xjpk0NrR_YcXrhu1rkXFrHzfRQSOqngA8jjIec7ko
+
+{
+  "username":"JoeBiden",
+  "password":"biden@123"
+}
+###
+GET http://localhost:3000/user/tweets/feed/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjc1NTIxMzg5fQ.06Xjpk0NrR_YcXrhu1rkXFrHzfRQSOqngA8jjIec7ko
+
+###
+GET http://localhost:3000/user/following/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjc1NTIxMzg5fQ.06Xjpk0NrR_YcXrhu1rkXFrHzfRQSOqngA8jjIec7ko
+###
+GET http://localhost:3000/user/followers/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjc1NTIxMzg5fQ.06Xjpk0NrR_YcXrhu1rkXFrHzfRQSOqngA8jjIec7ko
+###
+GET http://localhost:3000/tweets/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjc1NTIxMzg5fQ.06Xjpk0NrR_YcXrhu1rkXFrHzfRQSOqngA8jjIec7ko
+###
+GET http://localhost:3000/tweets/1/likes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjc1NTIxMzg5fQ.06Xjpk0NrR_YcXrhu1rkXFrHzfRQSOqngA8jjIec7ko
+###
+GET http://localhost:3000/tweets/1/replies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjc1NTIxMzg5fQ.06Xjpk0NrR_YcXrhu1rkXFrHzfRQSOqngA8jjIec7ko
+###
+GET http://localhost:3000/user/tweets
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjc1NTIxMzg5fQ.06Xjpk0NrR_YcXrhu1rkXFrHzfRQSOqngA8jjIec7ko
+###
+DELETE http://localhost:3000/tweets/12
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjc1NTIxMzg5fQ.06Xjpk0NrR_YcXrhu1rkXFrHzfRQSOqngA8jjIec7ko
+###
+POST http://localhost:3000/user/tweets
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjc1NTIxMzg5fQ.06Xjpk0NrR_YcXrhu1rkXFrHzfRQSOqngA8jjIec7ko
+
+{
+   "tweet": "The Mornings are good"
+}
+
+###
+GET http://localhost:3000/tableCheck/
