@@ -54,31 +54,6 @@ function authenticateToken(request, response, next) {
   }
 }
 
-app.post("/validate/", async (request, response) => {
-  const { username, password } = request.body;
-  const selectUserQuery = `SELECT * FROM user WHERE username = '${username}';`;
-  const databaseUser = await database.get(selectUserQuery);
-
-  if (databaseUser === undefined) {
-    response.status(400);
-    response.send("Invalid user");
-  } else {
-    const isPasswordMatched = await encrypt.compare(
-      password,
-      databaseUser.password
-    );
-    if (isPasswordMatched) {
-      const payload = { username: username };
-      const jwtToken = jwt.sign(payload, "AJAYKUMARGUTHULA");
-      response.send({ jwtToken });
-      next();
-    } else {
-      response.status(400);
-      response.send("Invalid password");
-    }
-  }
-});
-
 app.post("/register/", async (request, response) => {
   const { username, password, name, gender } = request.body;
   const selectUserQuery = `SELECT * FROM user WHERE username = '${username}'`;
@@ -117,12 +92,13 @@ app.post("/login/", async (request, response) => {
       databaseUser.password
     );
     if (isPasswordMatched) {
-      const authHeader = request.headers["authorization"];
-      const jwtToken = authHeader.split(" ")[1];
-      response.send({ jwtToken: jwtToken });
+      const payload = { username: username };
+      const jwtToken = jwt.sign(payload, "AJAYKUMARGUTHULA");
+      response.send({ jwtToken });
+      next();
     } else {
       response.status(400);
-      response.send(`Invalid password`);
+      response.send("Invalid password");
     }
   }
 });
@@ -140,7 +116,7 @@ app.get("/user/tweets/feed/", authenticateToken, async (request, response) => {
       return {
         username: item.username,
         tweet: item.tweet,
-        dateTime: item.date_time,          
+        dateTime: item.date_time,
       };
     })
   );
@@ -193,7 +169,7 @@ app.get("/tweets/:tweetId/", authenticateToken, async (request, response) => {
 
     response.send(queryResult);
   } else {
-    response.status(400);
+    response.status(401);
     response.send(`Invalid Request`);
   }
 });
@@ -233,7 +209,7 @@ app.get(
       userNamesArray = { likes: declaration() };
       response.send(userNamesArray);
     } else {
-      response.status(400);
+      response.status(401);
       response.send(`Invalid Request`);
     }
   }
@@ -277,7 +253,7 @@ app.get(
       nameRepliesArray = { replies: declaration() };
       response.send(nameRepliesArray);
     } else {
-      response.status(400);
+      response.status(401);
       response.send(`Invalid Request`);
     }
   }
@@ -376,9 +352,3 @@ app.delete(
 );
 
 module.exports = app;
-
-app.get("/tableCheck/", async (request, response) => {
-  const getUsersQuery = `SELECT * FROM tweet`;
-  const getUsers = await database.all(getUsersQuery);
-  response.send(getUsers);
-});
